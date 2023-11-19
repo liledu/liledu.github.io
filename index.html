@@ -8,13 +8,56 @@
     <title>Liledu´s Example web</title>
 
     <link rel="stylesheet" href="./css/index.css">
-
+    <!-- Jquery Script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 
     <h1 class="text">Text Example</h1>
 
     <button onclick="location.href='./inde.html'"> apretame </button>
+
+
+    <!-- Botón para abrir el modal -->
+    <button id="openModalBtn">Abrir Modal</button>
+
+    <div class="modal-container">
+        <div class="modal">
+            <div class="modal-container-inner">
+                <div class="modal-content">
+                    <video id="myVideo" src="./sofia_leslie.mp4" controls></video>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="confirm" onclick="felcitaciones()">Apetaaa aquim</button>
+                </div>
+            </div>
+
+            <div id="most" class="modal-deseos">
+                <div class="wrapper">        
+                    <form class="form__contact" action="#">
+                      <fieldset>
+                        <p>Ola dimdim, ecribem tu deseooms aquim!<span class="estrellita">🪄 <span>🌟</span></span></p>
+                        <p>1) <span class="form__field field--message" data-placeholder="tudesheoumno" tabindex="2" contenteditable></span></p>
+                        <p>2) <span class="form__field field--message" data-placeholder="tudesheodom" tabindex="2" contenteditable></span></p>
+                        <p>3) <span class="form__field field--message" data-placeholder="tumdeheotrem" tabindex="2" contenteditable></span></p>
+                       
+                        <div class="mensajitoms">
+                            <p>y epdo q se te cumplamtodomslosdeseoms mividaaaaa <span>💖</span></p>
+                            <button onclick="enviarFormulario()">Mandaa tus deseoos &#187;</button>
+                        </div>
+            
+                      </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- Custom Script -->
+    <script src="./index.js"></script>
     
 </body>
 </html>
