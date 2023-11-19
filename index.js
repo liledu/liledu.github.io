@@ -29,6 +29,9 @@ function felcitaciones() {
 }
 
 function enviarFormulario() {
+
+  event.preventDefault();
+    
   var deseo1 = $(".form__field[data-placeholder='tudesheoumno']").text().trim();
   var deseo2 = $(".form__field[data-placeholder='tudesheodom']").text().trim();
   var deseo3 = $(".form__field[data-placeholder='tumdeheotrem']").text().trim();
