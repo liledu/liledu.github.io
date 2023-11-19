@@ -13,8 +13,6 @@ $(document).ready(function() {
     });
   });
 
-
-
 });
 
 function felcitaciones() {
@@ -28,10 +26,12 @@ function felcitaciones() {
   }, 23); 
 }
 
+	
 function enviarFormulario() {
 
   event.preventDefault();
-    
+
+
   var deseo1 = $(".form__field[data-placeholder='tudesheoumno']").text().trim();
   var deseo2 = $(".form__field[data-placeholder='tudesheodom']").text().trim();
   var deseo3 = $(".form__field[data-placeholder='tumdeheotrem']").text().trim();
@@ -42,18 +42,18 @@ function enviarFormulario() {
       deseo3: deseo3
   };
 
+  localStorage.setItem('deseos-temp', JSON.stringify(datos), console.log("Deseos guardados!"));
+
   console.log(JSON.stringify(datos));
 
   // Cerrar el formulario (puedes ocultarlo o hacer lo que sea necesario)
   $(".form__contact").hide();
-
   $("#myVideo").attr("src", "./perrito.mp4");
 
   // Cargar y reproducir el nuevo video
   $("#myVideo")[0].load();
   $("#myVideo")[0].play();
-
   $("#myVideo").on("ended", function() {
-    $(".modal").fadeOut(1200);
-});
+      $(".modal").fadeOut(1200);
+  });
 }
