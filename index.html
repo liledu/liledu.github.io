@@ -1,61 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Liledu´s Example web</title>
-
-    <link rel="stylesheet" href="./css/index.css">
-    <!-- Jquery Script -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Contact Messages | Firebase</title>
+    <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
+    <div class="container">
+        <form action="" id="contactForm">
+            <div class="alert">Your message sent</div>
 
-    <h1 class="text">Text Example</h1>
-
-    <button onclick="location.href='./inde.html'"> apretame </button>
-
-
-    <!-- Botón para abrir el modal -->
-    <button id="openModalBtn">Abrir Modal</button>
-
-    <div class="modal-container">
-        <div class="modal">
-            <div class="modal-container-inner">
-                <div class="modal-content">
-                    <video id="myVideo" src="./sofia_leslie.mp4" controls></video>
-                </div>
-                <div class="modal-buttons">
-                    <button type="button" class="confirm" onclick="felcitaciones()">Apetaaa aquim</button>
-                </div>
+            <div class="inputBox">
+                <input type="text" id="name" placeholder="Your name...." />
             </div>
 
-            <div id="most" class="modal-deseos">
-                <div class="wrapper">        
-                    <form class="form__contact" action="">
-                      <fieldset>
-                        <p>Ola dimdim, ecribem tu deseooms aquim!<span class="estrellita">🪄 <span>🌟</span></span></p>
-                        <p>1) <span class="form__field field--message" data-placeholder="tudesheoumno" tabindex="2" contenteditable></span></p>
-                        <p>2) <span class="form__field field--message" data-placeholder="tudesheodom" tabindex="2" contenteditable></span></p>
-                        <p>3) <span class="form__field field--message" data-placeholder="tumdeheotrem" tabindex="2" contenteditable></span></p>
-                       
-                        <div class="mensajitoms">
-                            <p>y epdo q se te cumplamtodomslosdeseoms mividaaaaa <span>💖</span></p>
-                            <button onclick="enviarFormulario()">Mandaa tus deseoos &#187;</button>
-                        </div>
-            
-                      </fieldset>
-                    </form>
-                </div>
+            <div class="inputBox">
+                <input type="email" id="emailid" placeholder="Your Email....." />
             </div>
-        </div>
+
+            <div class="inputBox">
+                <textarea id="msgContent" cols="30" rows="10" placeholder="Message"></textarea>
+            </div>
+
+            <div class="inputBox">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
     </div>
 
-
-    <!-- Custom Script -->
-    <script src="./index.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/7.14.1-0/firebase.js"></script>
+    <script src="./mail.js"></script>
 </body>
+
 </html>
