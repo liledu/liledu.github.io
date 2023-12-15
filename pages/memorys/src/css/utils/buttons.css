@@ -1,0 +1,244 @@
+/* Start button Section */
+.start-button a {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: url("https://media.discordapp.net/attachments/1152823919108161536/1162634027317088376/image.png?ex=65867a50&is=65740550&hm=ae4bc37e91e5bd53d639fe24b1154b203d5d67f2ed2474f9c9894b69e0fd0d33&=&format=webp&quality=lossless&width=605&height=472");
+    background-position: center;
+    text-shadow: 0px 0px 10px hotpink, 1px 1px 0px hotpink, -1px -1px 0px hotpink,1px 1px 0px black;
+    z-index: 1;
+    transition: all 0.3s ease-in-out;
+
+    box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, 0.42);
+    -webkit-box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, 0.42);
+    -moz-box-shadow: 0px 0px 15px 2px rgba(255, 255, 255, 0.42);
+}
+
+.start-button a:hover {
+    transform: scale(1.1);
+}
+
+.start-button a:hover a  {
+    display: none;
+}
+
+.start-button a:active {
+  transform: scale(0.85);
+  font-size: 100% !important;
+  transition: all 0.1s ease-in-out;
+}
+
+.start-button a::before {
+  position: absolute;
+  bottom: -90px;
+  width: 200px;
+  height: auto;
+  line-height: 20pt;
+  font-size: 20pt;
+  text-align: center;
+}
+
+.start-button a::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: hotpink;
+  mix-blend-mode: color;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.start-button input {
+    display: none;
+}
+
+.start-button label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  display: none;
+}
+
+.start-button label:hover {
+  cursor: pointer;
+}
+
+.start-button input:nth-child(1):checked ~ a  {
+  background-size: 100%;
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 20pt;
+  color: white;
+}
+
+.start-button input:nth-child(1):checked ~ a::after {
+  opacity: 1;
+  background: white;
+  border-radius: 5px;
+}
+
+.start-button input:nth-child(1):checked ~ a > label:nth-child(2) {
+  display: initial;
+}
+
+.start-button input:nth-child(2):checked ~ a {
+  background-size: 125%;
+  width: 136px;
+  height: 52px;
+  font-size: 25pt;
+  border-radius: 10px;
+  color: #ffc8ec;
+  outline: 1px solid hotpink;
+}
+
+.start-button input:nth-child(2):checked ~ a:active {
+  font-size: 180% !important;
+}
+
+.start-button input:nth-child(2):checked ~ a::after {
+  opacity: 0.2;
+  border-radius: 10px;
+}
+
+.start-button input:nth-child(2):checked ~ a > label:nth-child(3) {
+  display: initial;
+}
+
+.start-button input:nth-child(3):checked ~ a {
+  background-size: 155%;
+  width: 126px;
+  height: 68px;
+  font-size: 35pt;
+  border-radius: 15px;
+  color: #ff9ede;
+  outline: 1px solid hotpink;
+  outline-offset: 5px;
+  text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black,
+    -1px 1px 0px black;
+}
+
+.start-button input:nth-child(3):checked ~ a:active {
+  font-size: 280% !important;
+}
+
+.start-button input:nth-child(3):checked ~ a::after {
+  opacity: 0.4;
+  border-radius: 15px;
+}
+
+.start-button input:nth-child(3):checked ~ a > label:nth-child(4) {
+  display: initial;
+}
+
+.start-button input:nth-child(4):checked ~ a {
+  background-size: 185%;
+  width: 116px;
+  height: 88px;
+  font-size: 50pt;
+  border-radius: 20px;
+  color: #ff73cf;
+  outline: 2px solid hotpink;
+  outline-offset: 15px;
+  text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black,
+    -1px 1px 0px black;
+}
+
+.start-button input:nth-child(4):checked ~ a:active {
+  font-size: 380% !important;
+}
+
+.start-button input:nth-child(4):checked ~ a::after {
+  opacity: 0.6;
+  border-radius: 20px;
+}
+
+.start-button input:nth-child(4):checked ~ a > label:nth-child(5) {
+  display: initial;
+}
+
+.start-button input:nth-child(5):checked ~ a {
+  background-size: 210%;
+  width: 114px;
+  height: 114px;
+  font-size: 70pt;
+  border-radius: 25px;
+  color: #ff4bc2;
+  outline: 3px solid hotpink;
+  outline-offset: 15px;
+  text-shadow: 1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black,
+    -1px 1px 0px black;
+}
+
+.start-button input:nth-child(5):checked ~ a:active {
+  font-size: 480% !important;
+}
+
+.start-button input:nth-child(5):checked ~ a::after {
+  opacity: 0.8;
+  border-radius: 25px;
+  backdrop-filter: blur(1px);
+}
+
+.start-button input:nth-child(5):checked ~ a > label:nth-child(6) {
+  display: initial;
+}
+
+.start-button input:nth-child(6):checked ~ a {
+  background-size: 250%;
+  width: 148px;
+  height: 148px;
+  font-size: 100pt;
+  border-radius: 30px;
+  color: #ff29b6;
+  outline: 3px solid hotpink;
+  outline-offset: 20px;
+}
+
+.start-button input:nth-child(6):checked ~ a:active {
+  font-size: 580% !important;
+}
+
+.start-button input:nth-child(6):checked ~ a::after {
+  opacity: 0.9;
+  border-radius: 30px;
+  backdrop-filter: blur(2px);
+}
+
+.start-button input:nth-child(6):checked ~ a > label:nth-child(7) {
+  display: initial;
+}
+
+.start-button input:nth-child(7):checked ~ a {
+  background-size: 300%;
+  width: 192px;
+  height: 192px;
+  font-size: 140pt;
+  border-radius: 35px;
+  color: #ff00a8;
+  outline: 4px solid #ff00a8;
+  outline-offset: 20px;
+}
+
+.start-button input:nth-child(7):checked ~ a:active {
+  font-size: 680% !important;
+}
+
+.start-button input:nth-child(7):checked ~ a::after {
+  opacity: 1;
+  border-radius: 35px;
+  backdrop-filter: blur(4px);
+}
+
+.start-button input:nth-child(7):checked ~ a > label:nth-child(1) {
+  display: initial;
+}

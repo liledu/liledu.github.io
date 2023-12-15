@@ -1,0 +1,57 @@
+@import url(./utils/buttons.css);
+@import url(./utils/transition-style.css);
+@import url(./utils/sub-gallery.css);
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #555555;
+}
+
+/* Content */
+.container {
+    display: none;
+}
+/* Container*/
+.container {
+    width: 90%;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+/* Sections */
+.start-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Transition */
+.centro-transition {
+    display: none;
+}
+
+/* One Section */
+.one-section {
+    display: none;
+}
+
+/* Media Query */
+@media (max-width: 768px) {
+
+    .container { 
+        width: 96%;
+    }
+    
+}
+
+/* ScrollBar */
+::-webkit-scrollbar {
+    display: none;
+}

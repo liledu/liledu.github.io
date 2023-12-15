@@ -1,13 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <!-- Metas -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title and icon -->
     <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/transition-style">
+
+    <!-- Css -->
+    <link rel="stylesheet" href="/src/css/index.css">
+
+    <!-- Animations Cdn -->
+    <link rel="stylesheet" href="https://unpkg.com/transition-style">
+
 </head>
 <body>
 
-    <center><h1>ola</h1></center>
+    <!-- Button Start -->
+    <div class="start-button" id="start">
+        <input checked type="radio" id="step-1" name="button-step" value="step-1">
+        <input type="radio" id="step-2" name="button-step" value="step-2">
+        <input type="radio" id="step-3" name="button-step" value="step-3">
+        <input type="radio" id="step-4" name="button-step" value="step-4">
+        <input type="radio" id="step-5" name="button-step" value="step-5">
+        <input type="radio" id="step-6" name="button-step" value="step-6">
+        <input type="radio" id="step-7" name="button-step" value="step-7">
+        
+        <a  title="button">
+          ❤
+          <label for="step-1"></label>
+          <label for="step-2"></label>
+          <label for="step-3"></label>
+          <label for="step-4"></label>
+          <label for="step-5"></label>
+          <label for="step-6"></label>
+          <label for="step-7"></label>
+        </a>
+    
+    </div>
+
+    <!-- Sub-Gallery -->
+    <div class="sub-gall">
+        <div class="child-container">
+            <img src="https://picsum.photos/100" alt="pic 1">
+        </div>
+        <div class="child-container">
+            <img src="https://cdn.discordapp.com/attachments/1127079742760292384/1173459137875693618/Sin_titulo-1.png?ex=6588f1fc&is=65767cfc&hm=dd9377484b9d7a6be883e7d71228edc62b8b977f0d4b2a941a44c598a93a606c&" alt="pic 2">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/300" alt="pic 3">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/400" alt="pic 4">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/500" alt="pic 5">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/600" alt="pic 6">
+        </div>
+        <div class="child-container">
+            <img src="https://cdn.discordapp.com/attachments/1127079742760292384/1173459137875693618/Sin_titulo-1.png?ex=6588f1fc&is=65767cfc&hm=dd9377484b9d7a6be883e7d71228edc62b8b977f0d4b2a941a44c598a93a606c&" alt="pic 7">
+        </div>
+        <div class="child-container">
+            <img src="https://cdn.discordapp.com/attachments/1127079742760292384/1176757608602927154/image.png?ex=658bb76c&is=6579426c&hm=429a135c2a44d53309620c0322862c25d2021b7d86da5f7ce7dba2f99636f00b&" alt="pic 8">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/350" alt="pic 9">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/450" alt="pic 10">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/550" alt="pic 11">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/650" alt="pic 12">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/110" alt="pic 13">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/210" alt="pic 14">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/310" alt="pic 15">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/410" alt="pic 16">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/510" alt="pic 17">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/610" alt="pic 18">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/125" alt="pic 19">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/225" alt="pic 20">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/325" alt="pic 21">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/425" alt="pic 22">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/525" alt="pic 23">
+        </div>
+        <div class="child-container">
+            <img src="https://picsum.photos/625" alt="pic 24">
+        </div>
+    </div>
+
+    <!-- Animation -->
+    <div class="centro-transition" transition-style="in:circle:center"></div>
+
+    <div class="content">
+        <div class="container">
+
+            <!-- One Section -->
+            <div class="one-section" id="one-section">
+                <center><h1>Hello World</h1></center>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Custom Scripts -->
+    <script src="/src/js/index.js"></script>
     
 </body>
 </html>
