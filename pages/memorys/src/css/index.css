@@ -13,10 +13,38 @@ body {
     background-color: #555555;
 }
 
+/* Overlay Start */
+.overlay-start {
+  height: 100vh;
+  width: 100%;
+  position: relative; 
+  overflow: hidden; 
+  font-family: mc ;
+}
+
+.bubble {
+  width: 150px;
+  height: 32px;
+  line-height: 30px;
+  font-weight: bold;
+  left: 0px;
+  text-align: center;
+  background-color: rgba(197, 197, 197, 0.8); 
+  color: black;
+  border-radius: 10px;
+  opacity: 0;
+  will-change: transform;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: absolute;
+  z-index: 2; 
+}
+
 /* Content */
 .container {
     display: none;
 }
+
 /* Container*/
 .container {
     width: 90%;
@@ -54,4 +82,10 @@ body {
 /* ScrollBar */
 ::-webkit-scrollbar {
     display: none;
+}
+
+/* Fonts */
+@font-face {
+    font-family: mc;
+    src: url(../fonts/Minecraft.ttf);
 }
