@@ -1,6 +1,9 @@
 @import url(./utils/buttons.css);
 @import url(./utils/transition-style.css);
 @import url(./utils/sub-gallery.css);
+@import url(./utils/songs-cards.css);
+@import url(./utils/texts.css);
+@import url(./utils/songs-textc.css);
 
 * {
     padding: 0;
@@ -77,6 +80,9 @@ body {
         width: 96%;
     }
     
+    .songs-year {
+        width: auto !important;
+    }
 }
 
 /* ScrollBar */
@@ -84,8 +90,16 @@ body {
     display: none;
 }
 
+/* aaa */
+hr.estilo-negro {
+  border: none;
+  height: 2px;
+  background-color: black; 
+}
+
 /* Fonts */
 @font-face {
     font-family: mc;
     src: url(../fonts/Minecraft.ttf);
 }
+
