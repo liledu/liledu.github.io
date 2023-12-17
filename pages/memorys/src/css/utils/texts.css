@@ -1,3 +1,12 @@
+.second-text {
+    font-family: mc;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
 .first-text {
     font-family: mc;
     display: none;
@@ -34,3 +43,38 @@
 }
 
 
+/* Textos h1 */
+.center-h1 {
+    font-family: mc;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.img-center {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center-h2 {
+    font-family: mc;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.center-h3 {
+    font-family: mc;
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

@@ -6,7 +6,10 @@ $(document).ready(function(){
     var burbuja4AnimationExecuted = false;
     var burbuja5AnimationExecuted = false;
 
+    var takin = new Audio('./src/sounds/takin.mp3');
     var rembem = new Audio('./src/sounds/wond.mp3');
+    var nino = new Audio('./src/sounds/nino.mp3');
+
     var burbujas = new Audio('./src/sounds/effects/globitos.mp3');
     var button = new Audio('./src/sounds/effects/button.mp3');
 
@@ -298,11 +301,22 @@ $(document).ready(function(){
                                                                                 addActiveClass(index);
                                                                                 setTimeout(() => {
                                                                                     removeActiveClass(index);
-                                                                                }, 10000); 
-                                                                            }, index * 10000); 
+                                                                                }, 1000); 
+                                                                            }, index * 1000); 
                                                                         });
+                                    
+                                                                        setTimeout(function() {
+                                                                            $('.songs-content').fadeOut('slow', function() {
 
-                                                                        $('#songs-textc').fadeIn('slow');
+                                                                                rembem.volume = 0;
+                                                                                rembem.pause()
+
+                                                                                takin.play();
+                                                                                takin.volume = 0.1;
+
+                                                                                setTimeout(secondpart, 2000);
+                                                                            });
+                                                                        }, (cards.length - 1) * 1000 + 2000);
                                                                     }
                                                                 });
                                     
@@ -318,8 +332,7 @@ $(document).ready(function(){
                                             }, 2000);
                                         }
                                     }
-                                    
-                                    
+
                                     setTimeout(type, 1000); 
                                 }
                             });
@@ -340,5 +353,147 @@ $(document).ready(function(){
         }
         
     });
+
+
+    function secondpart() {
+
+        $('.songs-textc').fadeIn();
+        $('.center-h1').show();
+
+        gsap.from('.center-h1', {
+            opacity: 0,
+            y: -50,
+            duration: 1,
+            ease: 'power2.out',
+            onComplete: function() {
+                typeWriter2();
+            }
+        });    
+    }
+
+
+
+    function typeWriter2() {
+        var text2 = "pedoo shabems cuaam caaamcioom somnoo munshoom cuamdo pasabamso jumtooms? :0";
+        var index2 = 0;
+    
+        function type2() {
+            $('#typewriter2').text(text2.substring(0, index2++));
+            if (index2 <= text2.length) {
+                setTimeout(type2, 100);
+            } else {
+                $('.center-h1').hide(function() {
+                    $('.img-center').show();
+
+                    takin.volume = 0.2;
+    
+                    gsap.from('.img-center', {
+                        scale: 0.5, 
+                        opacity: 0,
+                        duration: 1,
+                        ease: 'power2.out',
+                        onComplete: function() {
+
+                            setTimeout(function() {
+                                $('.img-center').hide();
+    
+                                setTimeout(function() {
+                                    $('.center-h2').show();
+                                    typeWriter3();
+                                }, 1000);
+                            }, 1000);
+                        }
+                    });
+                });
+            }
+        }
+        setTimeout(type2, 2000); 
+    }
+    
+    
+    function typeWriter3() {
+        var text3 = "Exactoo fueeeeeeem etaaam jiji";
+        var index3 = 0;
+    
+        function type3() {
+            $('#typewriter3').text(text3.substring(0, index3++));
+            if (index3 <= text3.length) {
+                setTimeout(type3, 100);
+            } else {
+                $('.center-h2').hide();
+                $('.song-content2').show();
+    
+                gsap.from('.song-content2', {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    ease: 'power2.out',
+                    onComplete: function() {
+                        takin.volume = 1;
+    
+                        setTimeout(function() {
+                            gsap.to('.song-content2', {
+                                opacity: 0,
+                                y: -50,
+                                duration: 1,
+                                ease: 'power2.out',
+                                onComplete: function() {
+                                    $('.song-content2').hide();
+                                    typeWriter4();
+                                }
+                            });
+                        }, 2000);
+                    }
+                });
+            }
+        }
+    
+        setTimeout(type3, 2000);
+    }
+
+    function typeWriter4() {
+        var text4 = "Ashim como nueeeuetams camciommnes fuerom pamte de nuestam dimdam histodiam tamiem fuedoms lo decuemtoms peo este año she aacaba y viemnee.. ";
+        var index4 = 0;
+    
+        $('.center-h3').show();
+    
+        function type4() {
+            $('#typewriter4').text(text4.substring(0, index4++));
+            if (index4 <= text4.length) {
+                setTimeout(type4, 100);
+            } else {
+                gsap.to('.songs-textc', { opacity: 0, duration: 1, onComplete: function() {
+                    $('.songs-textc').hide();
+
+                    takin.pause();
+
+                    nino.play();
+                    nino.volume = 0.5;
+                    
+                    $('.year2024').show();
+        
+                    setTimeout(function() {
+                        $('.year2024').hide();
+
+                        $('.fotos-year').show();
+    
+                    }, 12000); 
+                }});
+            }
+        }
+    
+        setTimeout(function() {
+            gsap.from('.center-h3', {
+                opacity: 0,
+                y: -50,
+                duration: 1,
+                ease: 'power2.out',
+                onComplete: function() {
+                    type4();
+                }
+            });
+        }, 2000);
+    }
+    
 
 });

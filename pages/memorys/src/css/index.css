@@ -4,6 +4,8 @@
 @import url(./utils/songs-cards.css);
 @import url(./utils/texts.css);
 @import url(./utils/songs-textc.css);
+@import url(./utils/year.css);
+@import url(./utils/fotos-year.css);
 
 * {
     padding: 0;

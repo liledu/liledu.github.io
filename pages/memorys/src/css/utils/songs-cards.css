@@ -116,3 +116,45 @@
     transform: translateY(-6px) rotate(2deg);
 }
 }
+
+.takin {
+    margin-bottom: 30px;
+}
+
+.song-content2 {
+    display: none;
+    width: 60%;
+    height: 60vh;
+    margin: 0 auto;
+    margin-top: 16%;
+}
+
+.spc {
+    animation: animacionShadobox 8s infinite;
+}
+
+@keyframes animacionShadobox {
+    0% {
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        transform: scale(1) rotate(0deg);
+
+    }
+    25% {
+        box-shadow: 0 0 20px rgba(0, 128, 255, 0.7);
+        transform: scale(1.06) rotate(4deg);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(51, 204, 51, 1);
+        transform: scale(1) rotate(-4deg);
+
+    }
+    75% {
+        box-shadow: 0 0 20px rgba(255, 165, 0, 0.7);
+        transform: scale(1.07) rotate(6deg);
+    }
+    100% {
+        box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        transform: scale(1) rotate(-6deg);
+    }
+    
+}
