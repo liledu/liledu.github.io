@@ -6,6 +6,7 @@
 @import url(./utils/songs-textc.css);
 @import url(./utils/year.css);
 @import url(./utils/fotos-year.css);
+@import url(./utils/sidebars.css);
 
 * {
     padding: 0;

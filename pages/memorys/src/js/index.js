@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 
     var burbuja1AnimationExecuted = false;
@@ -12,6 +13,8 @@ $(document).ready(function(){
 
     var burbujas = new Audio('./src/sounds/effects/globitos.mp3');
     var button = new Audio('./src/sounds/effects/button.mp3');
+
+    var reed = new Audio('./src/sounds/red.mp3');
 
 
     function randomColor() {
@@ -103,7 +106,7 @@ $(document).ready(function(){
 
         //
         if (selectedStep === 'step-2' && !burbuja1AnimationExecuted) {
-            $('.overlay-start').css('background-color', 'none');
+            $('.overlay-start').css('background-color', '#6c4788');
             $('#burbuja').show();
             $('#burbujaa').show();
 
@@ -124,7 +127,7 @@ $(document).ready(function(){
 
             rembem.volume = 0.2;
 
-            $('.overlay-start').css('background-color', 'none');
+            $('.overlay-start').css('background-color', '#c0558e');
             $('#burbuja2').show();
             $('#burbujaa2').show();
             $('#burbujaaa2').show();
@@ -148,7 +151,7 @@ $(document).ready(function(){
 
             rembem.volume = 0.3;
 
-            $('.overlay-start').css('background-color', 'none');
+            $('.overlay-start').css('background-color', '#286b71');
             $('#burbuja3').show();
             $('#burbujaa3').show();
             $('#burbujaaa3').show();
@@ -172,7 +175,7 @@ $(document).ready(function(){
 
             rembem.volume = 0.4;
 
-            $('.overlay-start').css('background-color', 'none');
+            $('.overlay-start').css('background-color', '#c075af');
             $('#burbuja4').show();
             $('#burbujaa4').show();
             $('#burbujaaa4').show();
@@ -199,7 +202,7 @@ $(document).ready(function(){
 
             rembem.volume = 0.5;
 
-            $('.overlay-start').css('background-color', 'none');
+            $('.overlay-start').css('background-color', '#88673c');
             $('#burbuja5').show();
             $('#burbujaa5').show();
             $('#burbujaaa5').show();
@@ -260,7 +263,7 @@ $(document).ready(function(){
                                 onComplete: function () {
                                     $('.card-text').fadeIn();
                         
-                                    var text = ".";
+                                    var text = "a";
                                     var index = 0;
                         
                                     function type() {
@@ -320,10 +323,12 @@ $(document).ready(function(){
                                                                     }
                                                                 });
                                     
-                                                                timeline.to('#card1', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true })
+                                                                timeline.to('#card1', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true  })
                                                                     .to('#card2', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true })
                                                                     .to('#card3', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true })
-                                                                    .to('#card4', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true });
+                                                                    .to('#card4', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true })
+                                                                    .to('#card5', { autoAlpha: 1, y: 0, duration: 1, ease: 'elastic.out(1, 0.3)', yoyo: true });
+
                                                             }
                                                         });
                                                     }
@@ -332,7 +337,6 @@ $(document).ready(function(){
                                             }, 2000);
                                         }
                                     }
-
                                     setTimeout(type, 1000); 
                                 }
                             });
@@ -476,8 +480,10 @@ $(document).ready(function(){
                         $('.year2024').hide();
 
                         $('.fotos-year').show();
-    
+                        typeWriter5();
+
                     }, 12000); 
+
                 }});
             }
         }
@@ -494,6 +500,398 @@ $(document).ready(function(){
             });
         }, 2000);
     }
+
+    function typeWriter5() {
+        var text5 = "ashi tamiem como la camciomnes fuedom pate de nueta hitodiaaam tamiem fuedom daaams fo0ooo0o0otooms... jiji";
+        var index5 = 0;
+    
+        function type5() {
+            $('#typewriter5').text(text5.substring(0, index5++));
+            if (index5 <= text5.length) {
+                setTimeout(type5, 100);
+            } else {
+                // Oculta .center-h4 y muestra .imgs-year
+                gsap.to('.center-h4', {
+                    opacity: 0,
+                    y: -50,
+                    duration: 1,
+                    ease: 'power2.out',
+                    onComplete: function() {
+                        $('.center-h4').hide();   
+                        imgsyear();                     
+                    }
+                });
+            }
+        }
+    
+        $('.center-h4').show();
+    
+        gsap.from('.center-h4', {
+            opacity: 0,
+            y: -50,
+            duration: 1,
+            ease: 'power2.out',
+            onComplete: function() {
+                type5();
+            }
+        });
+    }
+
+    var photoContainer = $('#photo-container');
+    var albumContainer = $('.album-container');
+
+    function imgsyear() {
+
+        $('.imgs-year').show();
+
+        function getRandomRotation() {
+            return Math.floor(Math.random() * 21) - 10;
+        }
+    
+        function formatDate(dateString) {
+            var options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        $.getJSON('images.json', function (data) {
+            photoContainer.show();
+            photoContainer.empty();
+    
+            var photoCounter = 0;
+    
+            var totalImagesToShow = Math.min(data.images.length, 10);
+    
+            for (var index = 0; index < totalImagesToShow; index++) {
+                (function (index) {
+                    setTimeout(function () {
+                        var rotation = getRandomRotation();
+                        var yearcard = $('<div>').addClass('yearcard').css({ 'transform': 'rotate(' + rotation + 'deg)' });
+    
+                        var img = $('<img>').attr('src', 'src/imgs/' + data.images[index].src).appendTo(yearcard);
+                        var title = $('<h2>').text(formatDate(data.images[index].date)).appendTo(yearcard);
+    
+                        photoContainer.append(yearcard);
+    
+                        yearcard.hide().fadeIn(1000);
+    
+                        photoCounter++;
+    
+                        if (photoCounter === 6) {
+                            adjustSpeed(15, data, index + 1);  
+                        }
+    
+                        if (photoCounter === totalImagesToShow) {
+                            showAlbum(data.images);
+                        }
+                    }, index * 3000);
+                })(index);
+            }
+        });
+
+    }
+
+    var palabras = ['aoi', 'buuu', 'ebuu', 'dimdiiim', 'dimditam :3', 'uwu', 'owo', 'uwu' , 'eqisom', 'amoalanexo', 'muiau', 'tiqiedo', 'AJAJKSD ###', 'taslocoime', 'taslocaoiem', 'pippipi', 'pimsheshitam', ' iacomite?', 'AKSDJK', 'haha', 'iloveoiu ', '⭐', '🏆', '🥇', '😚', '🎈', '👑', '🏠' , '🤶' , 'epalda', 'temgosueñompip', 'notnotyours' , 'qestoienamoraotuio', '2024!', '2023;v', 'oooohhhk', 'ceshidotom' , 'diñoshaudiom'];
+    var palabraas = ['33', '44', '####', 'tamo0o', 'buditoo', 'buuu', 'teestaneem', 'meloquee', 'elote XD', 'eqisotasia', 'umbobosoq', '7u7', 'pwp', ':v', ':b', ':p', 'eqisoo', 'ññiññiñi', 'liiwidicimimi', 'mamii', 'aia', 'ooohk', 'banateem', 'pavo 🦃', 'dimdimtoiamtom', 'amoajugwam', 'sieteocero', 'llavacadodam', 'takintakin', 'ysiteparece' , 'pimsheshitam', 'reimnitam', 'elmosham', 'bellam', '### ASKD', 'toieqisomxD']
+
+    //LEFT
+    function animateBuble(burbujaElement) {
+        var tl = gsap.timeline();
+    
+        var randomX = Math.random() * ($('.sidebar-left').width() - $(burbujaElement).width());
+        var randomY = Math.random() * ($('.sidebar-left').height() - $(burbujaElement).height());
+    
+        var palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
+        burbujaElement.innerText = palabraAleatoria;
+
+        tl.fromTo(burbujaElement, {
+            opacity: 0,
+            scale: 0,
+            x: randomX,
+            y: randomY,
+            rotation: Math.random() * 50 - 30,
+        }, {
+            opacity: 1,
+            scale: 1,
+            ease: 'elastic.out(1, 0.3)',
+            duration: 1,
+            onComplete: function () {
+                gsap.to(burbujaElement, {
+                    backgroundColor: randomColor(), 
+                    duration: 0.5,
+                    ease: 'power1.out',
+                    onStart: function () {
+                        gsap.to(burbujaElement, { scale: 1.1, duration: 0.5, ease: 'power1.out' });
+                    },
+                    onComplete: function () {
+                        gsap.to(burbujaElement, { scale: 1, duration: 0.5, ease: 'power1.in' });
+                    }
+                });
+            }
+        });
+    }
+    
+    function animateBuble2(burbujaElement) {
+        var tl = gsap.timeline();
+    
+        var palabraAleatoria = palabras[Math.floor(Math.random() * palabras.length)];
+        burbujaElement.innerText = palabraAleatoria;
+    
+        var randomX = Math.random() * ($('.sidebar-left').width() - $(burbujaElement).width());
+        var randomY = Math.random() * ($('.sidebar-left').height() - $(burbujaElement).height());
+    
+        tl.fromTo(burbujaElement, {
+            opacity: 0,
+            scale: 0,
+            x: randomX,
+            y: randomY,
+            rotation: Math.random() * 60 - 20,
+        }, {
+            opacity: 1,
+            scale: 1,
+            ease: 'elastic.out(1, 0.3)',
+            duration: 1,
+            onComplete: function () {
+                gsap.to(burbujaElement, {
+                    backgroundColor: randomColor(), 
+                    duration: 1,
+                    ease: 'power1.out',
+                    onStart: function () {
+                        gsap.to(burbujaElement, { scale: 1.2, duration: 1, ease: 'power1.out' });
+                    },
+                    onComplete: function () {
+                        
+                        gsap.to(burbujaElement, { scale: 1.1, duration: 1, ease: 'power1.in' });
+                    }
+                });
+            }
+        });
+    }
     
 
+    //right
+    function animaterBuble(burbujaElement) {
+        var tl = gsap.timeline();
+
+        var palabraAleatoria = palabraas[Math.floor(Math.random() * palabraas.length)];
+        burbujaElement.innerText = palabraAleatoria;
+    
+        var randomX = Math.random() * ($('.sidebar-right').width() - $(burbujaElement).width());
+        var randomY = Math.random() * ($('.sidebar-right').height() - $(burbujaElement).height());
+    
+        tl.fromTo(burbujaElement, {
+            opacity: 0,
+            scale: 0,
+            x: randomX,
+            y: randomY,
+            rotation: Math.random() * 50 - 30,
+        }, {
+            opacity: 1,
+            scale: 1,
+            ease: 'elastic.out(1, 0.3)',
+            duration: 1,
+            onComplete: function () {
+                gsap.to(burbujaElement, {
+                    backgroundColor: randomColor(), 
+                    duration: 0.5,
+                    ease: 'power1.out', 
+                    onStart: function () {
+                        gsap.to(burbujaElement, { scale: 1.1, duration: 0.5, ease: 'power1.out' });
+                    },
+                    onComplete: function () {
+                        gsap.to(burbujaElement, { scale: 1, duration: 0.5, ease: 'power1.in' });
+                    }
+                });
+            }
+        });
+    }
+    
+    function animaterBuble2(burbujaElement) {
+        var tl = gsap.timeline();
+    
+        var palabraAleatoria = palabraas[Math.floor(Math.random() * palabraas.length)];
+        burbujaElement.innerText = palabraAleatoria;
+
+        var randomX = Math.random() * ($('.sidebar-right').width() - $(burbujaElement).width());
+        var randomY = Math.random() * ($('.sidebar-right').height() - $(burbujaElement).height());
+    
+        tl.fromTo(burbujaElement, {
+            opacity: 0,
+            scale: 0,
+            x: randomX,
+            y: randomY,
+            rotation: Math.random() * 60 - 20,
+        }, {
+            opacity: 1,
+            scale: 1,
+            ease: 'elastic.out(1, 0.3)',
+            duration: 1,
+            onComplete: function () {
+                gsap.to(burbujaElement, {
+                    backgroundColor: randomColor(), 
+                    duration: 1,
+                    ease: 'power1.out', 
+                    onStart: function () {
+                        gsap.to(burbujaElement, { scale: 1.2, duration: 1, ease: 'power1.out' });
+                    },
+                    onComplete: function () {
+                        gsap.to(burbujaElement, { scale: 1.1, duration: 1, ease: 'power1.in' });
+                    }
+                });
+            }
+        });
+    }
+
+    function showAlbum(images) {
+        $('.yearcard-container').fadeOut(3200, function () {
+            albumContainer.fadeIn(120);
+    
+            var gallery = $('.gallery');
+            gallery.empty();
+    
+            var currentIndex = 0;
+    
+            while (currentIndex < images.length) {
+                var paragraph = $('<p>');
+    
+                for (var i = 0; i < 3; i++) {
+                    if (currentIndex >= images.length) {
+                        break;
+                    }
+    
+                    var image = images[currentIndex];
+                    var img = $('<img>').attr('src', 'src/imgs/' + image.src).attr('alt', image.alt);
+    
+                    setTimeout(function (img) {
+                        img.addClass('fadeInUp').css({ 'opacity': 1 });
+                    }, currentIndex * 100, img);
+    
+                    img.appendTo(paragraph);
+                    currentIndex++;
+                }
+    
+                paragraph.appendTo(gallery);
+    
+                paragraph = $('<p>');
+                for (var i = 0; i < 4; i++) {
+                    if (currentIndex >= images.length) {
+                        break;
+                    }
+    
+                    var image = images[currentIndex];
+                    var img = $('<img>').attr('src', 'src/imgs/' + image.src).attr('alt', image.alt);
+    
+                    setTimeout(function (img) {
+                        img.addClass('fadeInUp').css({ 'opacity': 1 });
+                    }, currentIndex * 100, img);
+    
+                    img.appendTo(paragraph);
+                    currentIndex++;
+                }
+    
+                paragraph.appendTo(gallery);
+    
+                paragraph = $('<p>');
+                for (var i = 0; i < 5; i++) {
+                    if (currentIndex >= images.length) {
+                        break;
+                    }
+    
+                    var image = images[currentIndex];
+                    var img = $('<img>').attr('src', 'src/imgs/' + image.src).attr('alt', image.alt);
+    
+                    setTimeout(function (img) {
+                        img.addClass('fadeInUp').css({ 'opacity': 1 });
+                    }, currentIndex * 100, img);
+    
+                    img.appendTo(paragraph);
+                    currentIndex++;
+                }
+    
+                paragraph.appendTo(gallery);
+            }
+
+            $('.sidebar-left').show();
+            $('.sidebar-right').show();
+
+            function burbujas() {
+
+                //Left 
+                $('#bubbleside1').show();
+                $('#bubbleside2').show();
+                $('#bubbleside3').show();
+                $('#bubbleside4').show();
+                
+                var bubble1 = document.getElementById('bubbleside1');
+                var bubble2 = document.getElementById('bubbleside2');
+                var bubble3 = document.getElementById('bubbleside3');
+                var bubble4 = document.getElementById('bubbleside4');
+
+                animateBuble(bubble1);
+                animateBuble2(bubble2);
+                animateBuble(bubble3);
+                animateBuble2(bubble4);
+                
+                //Right 
+                $('#bubbleide1').show();
+                $('#bubbleide2').show();
+                $('#bubbleide3').show();
+                $('#bubbleide4').show();
+                
+                var bubbler1 = document.getElementById('bubbleide1');
+                var bubbler2 = document.getElementById('bubbleide2');
+                var bubbler3 = document.getElementById('bubbleide3');
+                var bubbler4 = document.getElementById('bubbleide4');
+
+                animaterBuble(bubbler1);
+                animaterBuble2(bubbler2);
+                animaterBuble(bubbler3);
+                animaterBuble2(bubbler4);
+            }
+    
+            setInterval(burbujas, getRandomInt(2000, 4000));
+    
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min) + min);
+            }
+
+        });
+
+
+    }
+    
+    
+    window.onscroll = function() { stickySidebar() };
+
+    var sidebarLeft = document.getElementById("sidebarLeft");
+    var sidebarRight = document.getElementById("sidebarRight");
+
+    var stickyLeft = sidebarLeft.offsetTop;
+    var stickyRight = sidebarRight.offsetTop;
+
+    function stickySidebar() {
+        if (window.pageYOffset >= stickyLeft) {
+            sidebarLeft.style.position = "fixed";
+            sidebarLeft.style.top = "0";
+        } else {
+            sidebarLeft.style.position = "absolute";
+            sidebarLeft.style.top = "0";
+        }
+
+        if (window.pageYOffset >= stickyRight) {
+            sidebarRight.style.position = "fixed";
+            sidebarRight.style.top = "0";
+        } else {
+            sidebarRight.style.position = "absolute";
+            sidebarRight.style.top = "0";
+        }
+    }
+    
+});
+
+var elementosConClase = document.querySelectorAll('.emoji-hidden');
+
+elementosConClase.forEach(function(elemento) {
+  if (elemento.textContent.includes('🌽')) {
+    twemoji.parse(elemento);
+  }
 });

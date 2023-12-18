@@ -1,3 +1,147 @@
 .fotos-year {
     display: none;
+    width: 100% !important;
+}
+
+.imgs-year {
+    display: none;
+}
+
+.middle-div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Cards */
+.yearcard-container {
+    position: relative;
+    width: 26rem; 
+    height: 24rem; 
+    margin: 0 auto; 
+}
+
+.yearcard {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform-origin: center center;
+    color: #f0f0f0;
+    box-shadow: 0 10px 30px 5px rgba(0, 0, 0, 0.2);
+}
+
+.yearcard img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.9;
+    transition: opacity 0.2s ease-out;
+}
+
+.yearcard h2 {
+    position: absolute;
+    inset: auto auto 30px 30px;
+    margin: 0;
+    transition: inset 0.3s 0.3s ease-out;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+.yearcard:hover h2 {
+    transform: translateY(-18px);
+    transition: transform .8s ease-out;
+}
+
+.yearcard:hover img {
+    transition: opacity .8s ease-in;
+    opacity: 1;
+}
+
+/* aaa */
+.album-title {
+    font-family: mc;
+    text-align: center;
+    background-color: rgba(197, 197, 197, 0.8); 
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    white-space: pre-line; 
+    font-size: 22px;
+}
+
+.album-container {
+    display: none;
+}
+
+.gallery p {
+  height: 200px;
+  width: 500px;
+  margin: 100px auto;
+  position: relative;
+}
+
+.gallery img {
+  height: 100px;
+  position: absolute;
+  left: 0;
+  offset-path: path('m 0 50 q 50-30 100-30 t 100 30 100 0 100-30 100 30');
+  box-shadow: 1px 1px 3px #0008;
+  transition: transform .4s ease-out, offset-path .4s cubic-bezier(.77,-1.17,.75,.84),box-shadow .3s, z-index .3s;
+  z-index: 0;
+}
+
+.gallery img:hover {
+  transform: scale(3);
+  offset-path: path('m 5 65 q 45-0 90-0 t 90 0 90 0 90-0 90 0');
+  box-shadow: 3px 4px 10px #0006;
+  z-index: 999;
+}
+
+.gallery img:nth-last-child(3):first-child {
+  offset-distance: 17%;
+}
+.gallery img:nth-last-child(2):nth-child(2) {
+  offset-distance: 49%;
+}
+.gallery img:last-child:nth-child(3) {
+  offset-distance: 81%;
+}
+
+.gallery img:nth-last-child(4):first-child {
+  offset-distance: 10%;
+}
+.gallery img:nth-last-child(3):nth-child(2) {
+  offset-distance: 35%;
+}
+.gallery img:nth-last-child(2):nth-child(3) {
+  offset-distance: 65%;
+}
+.gallery img:last-child:nth-child(4) {
+  offset-distance: 90%;
+}
+
+.gallery img:nth-last-child(5):first-child {
+  offset-distance: 0%;
+}
+.gallery img:nth-last-child(4):nth-child(2) {
+  offset-distance: 25%;
+}
+.gallery img:nth-last-child(3):nth-child(3) {
+  offset-distance: 51%;
+}
+.gallery img:nth-last-child(2):nth-child(4) {
+  offset-distance: 75%;
+}
+.gallery img:last-child:nth-child(5) {
+  offset-distance: 100%;
 }

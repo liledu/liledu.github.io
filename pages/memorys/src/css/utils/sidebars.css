@@ -1,0 +1,17 @@
+.sidebar-left, .sidebar-right {
+    display: none; 
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 18%;
+    z-index: 1; 
+}
+
+.sidebar-right {
+    right: 0;
+}
+
+.center-content {
+    text-align: center;
+    background-color: lightgreen;
+}
