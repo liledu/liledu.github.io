@@ -263,7 +263,7 @@ $(document).ready(function(){
                                 onComplete: function () {
                                     $('.card-text').fadeIn();
                         
-                                    var text = "a";
+                                    var text = "odaaaaam mi vidaam comoetams oieem? epedooo0o qmiem \npuems codasho0o0m te hicem etoom pada decomdam l0o0 momentoms dimdiitoms qpashamos y amo a pasham \n y miividam etam fuedom algumnas de la camciomnes mas sonadom cuamdo etabamojumtooooooomss... tamo..... ";
                                     var index = 0;
                         
                                     function type() {
