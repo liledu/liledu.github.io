@@ -426,7 +426,7 @@ body {
 
 @font-face {
     font-family: dim;
-    src: url(/src/fonts/fc1.ttf);
+    src: url(../fonts/fc1.ttf);
 }
 
 .background-music {
