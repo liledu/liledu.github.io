@@ -355,7 +355,7 @@ $(document).ready(function() {
         gsap.to(royo1, {
             x: 0,
             opacity: 1,
-            duration: 3,
+            duration: 30,
             ease: 'back.out(1.7)',
             onComplete: function() {
 
@@ -369,7 +369,7 @@ $(document).ready(function() {
                 gsap.to(royo2, {
                     x: 0,
                     opacity: 1,
-                    duration: 3,
+                    duration: 30,
                     ease: 'back.out(1.7)',
                     onComplete: function() {
                         royo3.css('display', 'block');
@@ -382,7 +382,7 @@ $(document).ready(function() {
                         gsap.to(royo3, {
                             x: 0,
                             opacity: 1,
-                            duration: 3,
+                            duration: 30,
                             ease: 'back.out(1.7)',
                             onComplete: function() {                
                                 postboleto();
@@ -564,14 +564,14 @@ $(document).ready(function() {
         setTimeout(function() {
             gsap.to(cartaultima, {
                 opacity: 0,
-                duration: 4, 
+                duration: 10, 
                 ease: 'back.out(1.7)',
                 onComplete: function() {
                     cartaultima.css('display', 'none');
                     ultimo();
                 }
             });
-        }, 3000);
+        }, 8200);
 
 
     }
