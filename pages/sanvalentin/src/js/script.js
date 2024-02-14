@@ -276,7 +276,7 @@ $(document).ready(function() {
                     console.log('Animación completada del boton');
                 }
             });
-        }, 2000);
+        }, 10000);
     }
 
     function botontexttocao() {
@@ -318,10 +318,11 @@ $(document).ready(function() {
     
         typewriter = new Typewriter(elementoTexto, {
             loop: false, 
-            delay: 50, 
+            delay: 100, 
         });
     
-        typewriter.typeString('oladimdimtamoom')
+        typewriter.typeString('mi niñaaam hermosa mi amoshitom limditom asi como los recuerdos perduram en ñuestroms corasomnes tamiem perduran en royitos o cinitas peliculas mividam pq el amor q ñoshotoms tenemos es bien bonito y hermoso y ems un amor de peliculam cada momento a tu lado es una escena perfecta llena de emociones risams y ternuritams y muumshito amor mutuom jiji erems mi musam y mi imspiramciom erems una historiam q perdurara en ñuestrams almitas y en ñuestroms coraasoms shi jiji...')
+        .pauseFor(1000)
         .callFunction(function() {
             console.log('La animación ha terminado.');
             pasarboleto();
@@ -419,10 +420,11 @@ $(document).ready(function() {
     
         typewriter = new Typewriter(elementoTexto, {
             loop: false, 
-            delay: 50, 
+            delay: 100, 
         });
     
-        typewriter.typeString('oaaaaaaaaaaaaaaaaaaaaaaadimdiiiim')
+        typewriter.typeString('y mi dimdim mi amoshitom ashi como ñuestrom amor quedam em cimtas de peliculas y em ñuestrom coroshom em estem diam tam especial ia te lo dijem y q? perom qeriam hacertem umna invitaciom a o weñoom AJKDAJDKAS dartem um boletitom ashi :3 jijii qmsabem peroom mividam tamitom shim tamom demashiadom te amo con chochocolate de mamut com dosism de amor.. jjijitamodemashiadom y tiistañom escribemem >;C')
+        .pauseFor(1000)
         .callFunction(function() {
             console.log('La animación ha terminado.');
             despuesdeltext();
@@ -475,8 +477,6 @@ $(document).ready(function() {
           duration: 1, 
           ease: 'back.out(1.7)'
         });
-        
-
     }
     var isFlipped = false;
 
@@ -504,7 +504,7 @@ $(document).ready(function() {
 
         gsap.to(boleto_net, {
           opacity: 1,
-          duration: 4, 
+          duration: 10, 
           ease: 'back.out(1.7)'
         });
     }
@@ -532,10 +532,11 @@ $(document).ready(function() {
     
         typewriter = new Typewriter(elementoTexto, {
             loop: false, 
-            delay: 50, 
+            delay: 100, 
         });
     
-        typewriter.typeString('olap dimdim com')
+        typewriter.typeString('ooaa dimdim como estams oieem te eestañem como estams mividam como etams de tum codashomshitom como q ia mumchitas cosas flomatems ñom? alv JKASDJKAJKDperoiamashimejom tiii pq qmsabem tamo mividam y espero q te este gustamdo y te amo y teamo y te amo y te amo y teamo yiaam tamoomuumshitim pipip mishibeshitom pa tim muuuuuuuuuuuawkkk mishibeshitom patim aiaiai qierom ahorita mimitom abashatem y darte muumshito mishiheshitoms y sacartem a pasaiarm :c ppipi peroo eii bñate coshina iuu ata aqui iedems siño le digo a tu mamiii, señitoooo 😭 su hijam apesta a meurtaam iuuu peo aum ashi la amo muumshitom muumshitom :3 y aaa iaiiamaiam dejom de escribirm aumqñoqierom yq JASDJADJKPERO TAMOO DIMDIM MUUMCHITOM 💛✨🌠')
+        .pauseFor(1000)
         .callFunction(function() {
             console.log('La animación ha terminado.');
             cartaaam();
@@ -583,7 +584,10 @@ $(document).ready(function() {
         gsap.to(textofinaal, {
             opacity: 1,
             duration: 4, 
-            ease: 'back.out(1.7)'
+            ease: 'back.out(1.7)',
+            onComplete: function() {
+                generateRandomTexts();
+            }
         });
 
     }
@@ -595,8 +599,66 @@ $(document).ready(function() {
         frontImg.src = backImg.src;
         backImg.src = tempSrc;
     }
+    
+    const texts = [
+      "Te amo dimdim",
+      "Feliz San Valentín",
+      "Eres epeciam",
+      "Siempre jumtitoms",
+      "ti qiero comem",
+      "cahetitomsrojitos",
+      "Eres mi todo",
+      "Erems mi cielom",
+      "Mi cushuquitom"
+    ];
 
+    function getRandomText() {
+      return texts[Math.floor(Math.random() * texts.length)];
+    }
 
+    function getRandomColor() {
+      return '#' + Math.floor(Math.random()*16777215).toString(16);
+    }
+    
+    function createRandomText() {
+      const text = document.createElement('div');
+      text.classList.add('texto-aleatorio');
+      text.textContent = getRandomText();
+      text.style.backgroundColor = getRandomColor();
+      text.style.top = Math.random() * (window.innerHeight - 40) + 'px';
+      text.style.left = Math.random() * (window.innerWidth - 120) + 'px';
+      document.body.appendChild(text);
+    
+      gsap.fromTo(text, {
+        opacity: 0,
+        scale: 0 
+      }, {
+        opacity: 1,
+        scale: 1, 
+        duration: 1, 
+        onComplete: () => {
+          gsap.to(text, {
+            opacity: 0,
+            scale: 0, 
+            duration: 1, 
+            delay: 2,
+            onComplete: () => {
+              text.remove();
+            }
+          });
+        }
+      });
+    }
+    
+    function getRandomInterval(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+    
+    function generateRandomTexts() {
+      createRandomText();
+      const nextInterval = getRandomInterval(3000, 6000); 
+      setTimeout(generateRandomTexts, nextInterval);
+    }
     
 
 });
