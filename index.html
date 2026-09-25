@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09090b">
+  <title>Pene</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #09090b;
+      color: #f5f5f7;
+      font-family: "Manrope", Arial, sans-serif;
+    }
+    main {
+      min-height: 100vh;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: radial-gradient(ellipse at 50% 45%, #1c1825 0%, transparent 65%);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(4rem, 20vw, 18rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.075em;
+      animation: appear 700ms ease-out both;
+    }
+    ::selection { background: #c4b5fd; color: #09090b; }
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      h1 { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <main><h1>Pene</h1></main>
+</body>
+</html>
