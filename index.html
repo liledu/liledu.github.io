@@ -17,13 +17,15 @@
       font-family: "Manrope", Arial, sans-serif;
     }
     main {
+      position: relative;
+      overflow: hidden;
       min-height: 100vh;
       min-height: 100svh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 24px;
+      padding: 48px 24px calc(clamp(180px, 32svh, 340px) + 24px);
       background: radial-gradient(ellipse at 50% 45%, #1c1825 0%, transparent 65%);
     }
     h1 {
@@ -34,9 +36,9 @@
       letter-spacing: -0.075em;
       animation: appear 700ms ease-out both;
     }
-    .field { position: relative; width: min(900px, 100%); height: clamp(180px, 30vh, 300px); margin-top: 20px; border: 0; padding: 0; background: transparent; cursor: pointer; color: inherit; touch-action: manipulation; }
+    .field { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: clamp(180px, 32svh, 340px); margin: 0; border: 0; padding: 0; background: transparent; cursor: pointer; color: inherit; touch-action: manipulation; }
     canvas { display: block; width: 100%; height: 100%; }
-    .field:focus-visible { outline: 2px solid #8aca8e; outline-offset: 8px; border-radius: 24px; }
+    .field:focus-visible { outline: 2px solid #8aca8e; outline-offset: -3px; border-radius: 0; }
     .hint { color: #8a978b; font: 12px Arial, sans-serif; letter-spacing: .08em; margin: 18px 0 10px; text-align: center; }
     .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-items: center; font: 12px Arial, sans-serif; color: #aeb9af; }
     .download { font: inherit; color: inherit; border: 1px solid #ffffff20; border-radius: 20px; background: #ffffff05; padding: 8px 14px; cursor: pointer; }
@@ -61,7 +63,6 @@
       <span id="count" role="status" aria-live="polite"></span>
       <button class="download" id="download">Descargar JSON</button>
     </div>
-    <p class="hint" id="storage-note">Contador de este navegador · Sin IP ni identificadores</p>
   </main>
   <script>
     (() => {
@@ -71,14 +72,13 @@
       const label = document.getElementById('count');
       const key = 'grass-anonymous-clicks-v1';
       const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-      let clicks = 0, persistent = true;
+      let clicks = 0;
       try {
         const saved = JSON.parse(localStorage.getItem(key) || '0');
         clicks = Number.isSafeInteger(saved) && saved >= 0 ? saved : 0;
-      } catch { persistent = false; }
+      } catch {}
       const updateCount = () => {
         label.textContent = clicks + (clicks === 1 ? ' toque al pasto' : ' toques al pasto');
-        if (!persistent) document.getElementById('storage-note').textContent = 'Contador de esta sesión · Almacenamiento local no disponible';
       };
       updateCount();
       let width = 0, height = 0, blades = [], ripples = [];
@@ -90,10 +90,10 @@
         canvas.width = Math.round(width * dpr); canvas.height = Math.round(height * dpr);
         if (!ctx) return;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        blades = Array.from({ length: Math.min(650, Math.floor(width * .85)) }, () => ({
+        blades = Array.from({ length: Math.min(1800, Math.floor(width * 1.3)) }, () => ({
           x: Math.random() * width,
-          y: height * (.67 + Math.random() * .24),
-          h: height * (.13 + Math.random() * .36),
+          y: height * (.82 + Math.random() * .22),
+          h: height * (.22 + Math.random() * .42),
           lean: (Math.random() - .5) * 28,
           phase: Math.random() * Math.PI * 2,
           size: 1.5 + Math.random() * 3,
@@ -107,6 +107,9 @@
         const glow = ctx.createRadialGradient(width/2, height*.85, 0, width/2, height*.85, width*.5);
         glow.addColorStop(0, '#284c252f'); glow.addColorStop(1, '#09090b00');
         ctx.fillStyle = glow; ctx.fillRect(0,0,width,height);
+        const ground = ctx.createLinearGradient(0, height * .82, 0, height);
+        ground.addColorStop(0, '#15271800'); ground.addColorStop(1, '#152718');
+        ctx.fillStyle = ground; ctx.fillRect(0, height * .82, width, height * .18);
         for (const b of blades) {
           const distance = Math.hypot(pointer.x-b.x, pointer.y-(b.y-b.h*.6));
           const force = Math.max(0, 1-distance/110);
@@ -140,7 +143,7 @@
         const b=field.getBoundingClientRect();
         if (!reduced.matches) ripples.push({x:e.detail ? e.clientX-b.left : width/2,y:e.detail ? e.clientY-b.top : height*.8,start:performance.now()});
         clicks = Math.min(Number.MAX_SAFE_INTEGER, clicks+1);
-        try { localStorage.setItem(key, JSON.stringify(clicks)); } catch { persistent=false; }
+        try { localStorage.setItem(key, JSON.stringify(clicks)); } catch {}
         updateCount();
       });
       document.getElementById('download').addEventListener('click', () => {
