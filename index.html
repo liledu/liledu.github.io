@@ -70,17 +70,30 @@
       const ctx = canvas.getContext('2d');
       const field = document.getElementById('field');
       const label = document.getElementById('count');
-      const key = 'grass-anonymous-clicks-v1';
+      const API = 'https://pene.up.railway.app';
       const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-      let clicks = 0;
-      try {
-        const saved = JSON.parse(localStorage.getItem(key) || '0');
-        clicks = Number.isSafeInteger(saved) && saved >= 0 ? saved : 0;
-      } catch {}
+      let clicks = null, updatedAt = null, saving = false, loading = false;
       const updateCount = () => {
-        label.textContent = clicks + (clicks === 1 ? ' toque al pasto' : ' toques al pasto');
+        label.textContent = clicks === null ? 'Cargando contador…' : clicks.toLocaleString('es-HN') + (clicks === 1 ? ' toque al pasto' : ' toques al pasto');
       };
+      async function requestCount(method = 'GET') {
+        const response = await fetch(API + '/clicks', { method, signal: AbortSignal.timeout(60000) });
+        if (!response.ok) throw new Error(response.status === 429 ? 'Esperá un minuto antes de volver a tocar.' : 'No se pudo confirmar. Recargá el contador.');
+        const data = await response.json();
+        if (!Number.isSafeInteger(data.clicks) || data.clicks < 0) throw new Error('Respuesta inválida.');
+        clicks = data.clicks; updatedAt = data.updatedAt;
+        return data;
+      }
+      async function refreshCount() {
+        if (saving || loading) return;
+        loading = true;
+        try { await requestCount(); if (!saving) updateCount(); }
+        catch { if (!saving) label.textContent = 'Contador no disponible. Reintentando…'; }
+        finally { loading = false; }
+      }
       updateCount();
+      refreshCount();
+      setInterval(() => { if (!document.hidden) refreshCount(); }, 30000);
       let width = 0, height = 0, blades = [], ripples = [];
       let pointer = { x: -1000, y: -1000 };
       function resize() {
@@ -139,22 +152,28 @@
         if(reduced.matches) draw(performance.now());
       });
       field.addEventListener('pointerleave', () => {pointer={x:-1000,y:-1000};if(reduced.matches)draw(performance.now());});
-      field.addEventListener('click', e => {
+      field.addEventListener('click', async e => {
         const b=field.getBoundingClientRect();
         if (!reduced.matches) ripples.push({x:e.detail ? e.clientX-b.left : width/2,y:e.detail ? e.clientY-b.top : height*.8,start:performance.now()});
-        clicks = Math.min(Number.MAX_SAFE_INTEGER, clicks+1);
-        try { localStorage.setItem(key, JSON.stringify(clicks)); } catch {}
-        updateCount();
+        if (saving || loading) return;
+        saving = true;
+        field.setAttribute('aria-busy', 'true');
+        label.textContent = 'Guardando toque…';
+        try { await requestCount('POST'); updateCount(); }
+        catch (error) { label.textContent = error.message; }
+        finally { saving = false; field.removeAttribute('aria-busy'); }
       });
-      document.getElementById('download').addEventListener('click', () => {
-        const blob=new Blob([JSON.stringify({scope:'this-browser',clicks},null,2)],{type:'application/json'});
+      document.getElementById('download').addEventListener('click', async () => {
+        if (saving || loading) return;
+        loading = true;
+        try {
+        const data = await requestCount(); updateCount();
+        const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
         const url=URL.createObjectURL(blob), link=document.createElement('a');
         link.href=url; link.download='grass-clicks.json'; link.click();
         setTimeout(()=>URL.revokeObjectURL(url),1000);
-      });
-      addEventListener('storage', e => {
-        if (e.key!==key) return;
-        try { const n=JSON.parse(e.newValue || '0');if(Number.isSafeInteger(n)&&n>=0){clicks=n;updateCount();} } catch {}
+        } catch { label.textContent = 'No se pudo descargar el contador.'; }
+        finally { loading = false; }
       });
       new ResizeObserver(resize).observe(field);
       let frame=0;
