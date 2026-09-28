@@ -208,9 +208,17 @@
         const host = document.getElementById('message-bubbles');
         if (!host) return;
         const safe = (messages || []).filter(m => m && m.text).slice(0, 10);
+        // Posiciones alrededor del contenido central para que las burbujas
+        // nunca tapen el titulo, la frase ni el contador.
+        const slots = [
+          [14, 13], [86, 14],
+          [12, 29], [89, 31],
+          [15, 46], [86, 48],
+          [11, 62], [90, 63],
+          [27, 72], [73, 72]
+        ];
         host.innerHTML = safe.map((m, i) => {
-          const x = 12 + ((i * 23 + 11) % 76);
-          const y = 10 + ((i * 17 + 9) % 56);
+          const [x, y] = slots[i % slots.length];
           const duration = 4.8 + (i % 5) * .7;
           const delay = -((i % 6) * .55);
           return `<div class="message-bubble" style="--x:${x}%;--y:${y}%;--duration:${duration}s;--delay:${delay}s">${escapeHtml(m.text)}</div>`;
