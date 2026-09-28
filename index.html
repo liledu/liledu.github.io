@@ -50,12 +50,52 @@
     canvas { display: block; width: 100%; height: 100%; }
     .field:focus-visible { outline: 2px solid #8aca8e; outline-offset: -3px; border-radius: 0; }
     .hint { color: #f0f4ed; font: 12px Arial, sans-serif; letter-spacing: .08em; margin: 18px 0 10px; text-align: center; }
-    .messages { position: relative; z-index: 2; width: min(640px, 100%); margin: 4px 0 16px; padding: 14px 16px; border: 1px solid #ffffff1c; border-radius: 18px; background: #08110c80; backdrop-filter: blur(12px); font: 13px Arial,sans-serif; }
-    .messages-head { display:flex; justify-content:space-between; color:#e6f3df; margin-bottom:10px; }
-    .messages-head a { color:#cfe9bc; }
-    .message-list { display:grid; gap:7px; max-height:150px; overflow:auto; }
-    .message { padding:8px 10px; border-radius:10px; background:#ffffff0b; color:#eef6eb; overflow-wrap:anywhere; }
-    .message small { display:block; margin-top:4px; color:#aeb9af; font-size:10px; }
+    .message-bubbles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .message-bubble {
+      position: absolute;
+      left: var(--x);
+      top: var(--y);
+      max-width: min(260px, 72vw);
+      padding: 12px 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      box-shadow: 0 10px 35px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.18);
+      backdrop-filter: blur(14px) saturate(125%);
+      -webkit-backdrop-filter: blur(14px) saturate(125%);
+      color: #f7fff4;
+      font: 600 13px/1.35 Arial, sans-serif;
+      text-align: center;
+      overflow-wrap: anywhere;
+      opacity: 0;
+      transform: translate(-50%, 20px) scale(.92);
+      animation: bubbleIn .8s ease forwards, bubbleFloat var(--duration) ease-in-out var(--delay) infinite alternate;
+      text-shadow: 0 1px 8px rgba(0,0,0,.35);
+    }
+    .message-bubble::after {
+      content: '';
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      right: 18px;
+      bottom: -4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+      box-shadow: 7px 7px 0 -2px rgba(255,255,255,.12);
+    }
+    @keyframes bubbleIn {
+      to { opacity: .96; transform: translate(-50%, 0) scale(1); }
+    }
+    @keyframes bubbleFloat {
+      from { margin-top: -8px; margin-left: -6px; }
+      to { margin-top: 10px; margin-left: 8px; }
+    }
     .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-items: center; font: 12px Arial, sans-serif; color: #f0f4ed; }
     .download { font: inherit; color: inherit; border: 1px solid #ffffff20; border-radius: 20px; background: #ffffff05; padding: 8px 14px; cursor: pointer; }
     ::selection { background: #c4b5fd; color: #09090b; }
@@ -79,7 +119,7 @@
       <canvas id="grass" aria-hidden="true"></canvas>
     </button>
     <p class="hint">Tocá el pasto. Un poquito de aire libre.</p>
-    <section class="messages" id="messages"><div class="messages-head"><span>Mensajes de la comunidad</span><a href="mensajes/">Escribir</a></div><div id="message-list" class="message-list"></div></section>
+    <div class="message-bubbles" id="message-bubbles" aria-live="polite"></div>
     <div class="stats">
       <span id="count" role="status" aria-live="polite"></span>
       <button class="download" id="download">Descargar JSON</button>
@@ -161,7 +201,29 @@
       setInterval(updateScene, 60000);
       updateCount();
       if (queue.length) scheduleSync(); else refreshCount();
-      async function loadMessages() { try { const r=await fetch(API+'/messages'); if(!r.ok) return; const data=await r.json(); document.getElementById('message-list').innerHTML=(data.messages||[]).slice(0,8).map(m=>`<div class="message">${m.text.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}<small>${new Date(m.createdAt).toLocaleString('es-HN')}</small></div>`).join('')||'<div class="message">Todavía no hay mensajes.</div>'; } catch {} }
+      function escapeHtml(value='') {
+        return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      }
+      function renderMessageBubbles(messages) {
+        const host = document.getElementById('message-bubbles');
+        if (!host) return;
+        const safe = (messages || []).filter(m => m && m.text).slice(0, 10);
+        host.innerHTML = safe.map((m, i) => {
+          const x = 12 + ((i * 23 + 11) % 76);
+          const y = 10 + ((i * 17 + 9) % 56);
+          const duration = 4.8 + (i % 5) * .7;
+          const delay = -((i % 6) * .55);
+          return `<div class="message-bubble" style="--x:${x}%;--y:${y}%;--duration:${duration}s;--delay:${delay}s">${escapeHtml(m.text)}</div>`;
+        }).join('');
+      }
+      async function loadMessages() {
+        try {
+          const r = await fetch(API + '/messages');
+          if (!r.ok) return;
+          const data = await r.json();
+          renderMessageBubbles(data.messages);
+        } catch {}
+      }
       loadMessages(); setInterval(() => { if (!document.hidden) { refreshCount(); loadMessages(); } }, 30000);
       addEventListener('online', () => { if (queue.length) scheduleSync(0); else refreshCount(); });
       document.addEventListener('visibilitychange', () => {
