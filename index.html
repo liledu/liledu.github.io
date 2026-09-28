@@ -50,6 +50,12 @@
     canvas { display: block; width: 100%; height: 100%; }
     .field:focus-visible { outline: 2px solid #8aca8e; outline-offset: -3px; border-radius: 0; }
     .hint { color: #f0f4ed; font: 12px Arial, sans-serif; letter-spacing: .08em; margin: 18px 0 10px; text-align: center; }
+    .messages { position: relative; z-index: 2; width: min(640px, 100%); margin: 4px 0 16px; padding: 14px 16px; border: 1px solid #ffffff1c; border-radius: 18px; background: #08110c80; backdrop-filter: blur(12px); font: 13px Arial,sans-serif; }
+    .messages-head { display:flex; justify-content:space-between; color:#e6f3df; margin-bottom:10px; }
+    .messages-head a { color:#cfe9bc; }
+    .message-list { display:grid; gap:7px; max-height:150px; overflow:auto; }
+    .message { padding:8px 10px; border-radius:10px; background:#ffffff0b; color:#eef6eb; overflow-wrap:anywhere; }
+    .message small { display:block; margin-top:4px; color:#aeb9af; font-size:10px; }
     .stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-items: center; font: 12px Arial, sans-serif; color: #f0f4ed; }
     .download { font: inherit; color: inherit; border: 1px solid #ffffff20; border-radius: 20px; background: #ffffff05; padding: 8px 14px; cursor: pointer; }
     ::selection { background: #c4b5fd; color: #09090b; }
@@ -73,6 +79,7 @@
       <canvas id="grass" aria-hidden="true"></canvas>
     </button>
     <p class="hint">Tocá el pasto. Un poquito de aire libre.</p>
+    <section class="messages" id="messages"><div class="messages-head"><span>Mensajes de la comunidad</span><a href="mensajes/">Escribir</a></div><div id="message-list" class="message-list"></div></section>
     <div class="stats">
       <span id="count" role="status" aria-live="polite"></span>
       <button class="download" id="download">Descargar JSON</button>
@@ -154,7 +161,8 @@
       setInterval(updateScene, 60000);
       updateCount();
       if (queue.length) scheduleSync(); else refreshCount();
-      setInterval(() => { if (!document.hidden) refreshCount(); }, 30000);
+      async function loadMessages() { try { const r=await fetch(API+'/messages'); if(!r.ok) return; const data=await r.json(); document.getElementById('message-list').innerHTML=(data.messages||[]).slice(0,8).map(m=>`<div class="message">${m.text.replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}<small>${new Date(m.createdAt).toLocaleString('es-HN')}</small></div>`).join('')||'<div class="message">Todavía no hay mensajes.</div>'; } catch {} }
+      loadMessages(); setInterval(() => { if (!document.hidden) { refreshCount(); loadMessages(); } }, 30000);
       addEventListener('online', () => { if (queue.length) scheduleSync(0); else refreshCount(); });
       document.addEventListener('visibilitychange', () => {
         updateScene();
